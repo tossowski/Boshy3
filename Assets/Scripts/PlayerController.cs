@@ -61,10 +61,6 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("attacking", true);
     }
 
-    void swordSweep()
-    {
-        Debug.Log("slash");
-    }
 
     void stopAttacking()
     {
