@@ -30,20 +30,21 @@ public class Skeleton : Enemy
             if (x > 0)
             {
                 facingLeft = false;
-                if (myrigidbody.velocity.magnitude < maxSpeed)
-                {
-                    myrigidbody.AddForce(new Vector2(70.0f, 0.0f), ForceMode2D.Impulse);
-                }
-                
+                //if (myrigidbody.velocity.magnitude < maxSpeed)
+                //{
+                //    myrigidbody.AddForce(new Vector2(70.0f, 0.0f), ForceMode2D.Impulse);
+                //}
+                myrigidbody.velocity = new Vector2(maxSpeed, myrigidbody.velocity.y);
                 transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
             }
             else if (x < 0)
             {
                 facingLeft = true;
-                if (myrigidbody.velocity.magnitude < maxSpeed)
-                {
-                    myrigidbody.AddForce(new Vector2(-70.0f, 0.0f), ForceMode2D.Impulse);
-                }
+                //if (myrigidbody.velocity.magnitude < maxSpeed)
+                //{
+                //    myrigidbody.AddForce(new Vector2(-70.0f, 0.0f), ForceMode2D.Impulse);
+                //}
+                myrigidbody.velocity = new Vector2(-maxSpeed, myrigidbody.velocity.y);
                 transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
             }
         }

@@ -12,10 +12,11 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public GameObject projectile;
     private bool facingLeft;
+    private bool secondJumpAvailable;
     // Start is called before the first frame update
     void Start()
     {
-        
+        secondJumpAvailable = true;
         anim = GetComponent<Animator>();
         myRigidBody = GetComponent<Rigidbody2D>();
     }
@@ -55,7 +56,8 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("running", false);
         }
-        transform.position = new Vector3(transform.position.x + x * moveSpeed * Time.deltaTime, transform.position.y, transform.position.z);
+        myRigidBody.velocity = new Vector2(x * moveSpeed, myRigidBody.velocity.y);
+        //transform.position = new Vector3(transform.position.x + x * moveSpeed * Time.deltaTime, transform.position.y, transform.position.z);
     }
 
     void attack()
@@ -87,16 +89,24 @@ public class PlayerController : MonoBehaviour
 
     void jump()
     {
-        if (!anim.GetBool("airborne") && Input.GetKeyDown("z"))
+        if (Input.GetKeyDown("z"))
         {
-            anim.SetBool("airborne", true);
-            //myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, jumpForce);
-        }
-        
+            if (!anim.GetBool("airborne"))
+            {
+                anim.SetBool("airborne", true);
+            } else if (secondJumpAvailable)
+            {
+                myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, jumpForce);
+                anim.SetBool("doubleJump", true);
+                secondJumpAvailable = false;
+            }
+        }   
     }
 
     public void setAirborneFalse()
     {
         anim.SetBool("airborne", false);
+        anim.SetBool("doubleJump", false);
+        secondJumpAvailable = true;
     }
 }
