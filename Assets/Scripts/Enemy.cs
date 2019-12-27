@@ -7,6 +7,9 @@ public class Enemy : MonoBehaviour
     protected Rigidbody2D myrigidbody;
     protected GameObject player;
     protected Animator anim;
+    public int maxHealth;
+    public int currHealth;
+    public float attackRange;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,5 +32,21 @@ public class Enemy : MonoBehaviour
     public virtual void attack()
     {
 
+    }
+
+    public virtual void damage(int n)
+    {
+        currHealth -= n;
+        if (currHealth <= 0)
+        {
+            deathrattle();
+        }
+    }
+
+    public virtual void deathrattle()
+    {
+        //GetComponent<BoxCollider2D>().enabled = false;
+        anim.SetBool("SHINEI", true);
+        Destroy(gameObject, 1.0f);
     }
 }

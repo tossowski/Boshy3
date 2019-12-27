@@ -50,7 +50,7 @@ public class Skeleton : Enemy
 
         if (attacking)
         {
-            //myrigidbody.velocity = new Vector2(0.0f, myrigidbody.velocity.y);
+            myrigidbody.velocity = new Vector2(0.0f, myrigidbody.velocity.y);
         }
     }
 
@@ -72,10 +72,9 @@ public class Skeleton : Enemy
 
     public override void attack()
     {
-        if (!attacking && Vector3.Distance(player.transform.position, transform.position) < 3)
+        if (!attacking && Vector3.Distance(player.transform.position, transform.position) < attackRange)
         {
             attacking = true;
-            
             anim.SetBool("attacking", true);
         }
     }

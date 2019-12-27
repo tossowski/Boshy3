@@ -24,6 +24,18 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
+        
+        if (!anim.GetBool("SHINEI"))
+        {
+            move();
+            attack();
+            jump();
+        }
+
+    }
+
+    private void move()
+    {
         float x = Input.GetAxisRaw("Horizontal");
         if (x != 0)
         {
@@ -38,29 +50,33 @@ public class PlayerController : MonoBehaviour
                 facingLeft = true;
                 transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
             }
-        } else
+        }
+        else
         {
             anim.SetBool("running", false);
         }
-        
-
         transform.position = new Vector3(transform.position.x + x * moveSpeed * Time.deltaTime, transform.position.y, transform.position.z);
-        //myRigidBody.velocity = new Vector2(x).normalized * moveSpeed * Time.deltaTime;
-        //isMoving = myRigidBody.velocity != new Vector2(0f, 0f);
-        if (Input.GetKeyDown("x"))
-        {
-            attack();
-        }
-
-        if (Input.GetKeyDown("z"))
-        {
-            jump();
-        }
     }
 
     void attack()
     {
-        anim.SetBool("attacking", true);
+        if (Input.GetKeyDown("x") && !anim.GetBool("airborne"))
+        {
+            anim.SetBool("attacking", true);
+        }
+         
+            
+    }
+
+    void jumpSquat()
+    {
+        if (!Input.GetKey("z"))
+        {
+            myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, jumpForce / 1.5f);
+        } else
+        {
+            myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, jumpForce);
+        }
     }
 
 
@@ -71,13 +87,15 @@ public class PlayerController : MonoBehaviour
 
     void jump()
     {
-
-        anim.SetBool("airborne", true);
-        myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, jumpForce);
+        if (!anim.GetBool("airborne") && Input.GetKeyDown("z"))
+        {
+            anim.SetBool("airborne", true);
+            //myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, jumpForce);
+        }
         
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    public void setAirborneFalse()
     {
         anim.SetBool("airborne", false);
     }
