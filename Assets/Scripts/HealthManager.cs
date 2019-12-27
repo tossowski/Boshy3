@@ -45,5 +45,10 @@ public class HealthManager : MonoBehaviour
             
             hearts.GetChild((int)(Math.Ceiling(currHealth / 2.0) - 1)).gameObject.GetComponent<Image>().sprite = halfHeart;
         }
+        if (currHealth <= 0)
+        {
+            Animator anim = GetComponent<Animator>();
+            anim.SetBool("SHINEI", true);
+        }
     }
 }
