@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    
 
     private Animator anim;
     private Rigidbody2D myRigidBody;
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         anim = GetComponent<Animator>();
         myRigidBody = GetComponent<Rigidbody2D>();
     }
