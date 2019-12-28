@@ -82,9 +82,9 @@ GameObject:
   - component: {fileID: 5906806085161638270}
   - component: {fileID: 5906806085161638271}
   - component: {fileID: 5906806085161638256}
-  - component: {fileID: 5906806085161638257}
   - component: {fileID: 5906806085161638258}
   - component: {fileID: 5906806085161638259}
+  - component: {fileID: 35466943}
   m_Layer: 9
   m_Name: Slime
   m_TagString: Enemy
@@ -175,32 +175,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &5906806085161638257
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5906806085161638260}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.058203697, y: -0.63284975}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 3.125}
-    newSize: {x: 4, y: 3.125}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.4733677, y: 1.466709}
-  m_EdgeRadius: 0
 --- !u!50 &5906806085161638258
 Rigidbody2D:
   serializedVersion: 4
@@ -221,7 +195,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &5906806085161638259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,4 +210,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   currHealth: 10
-  maxSpeed: 10
+  attackRange: 3
+  maxSpeed: 5
+--- !u!70 &35466943
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5906806085161638260}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.00000007511483, y: -0.630109}
+  m_Size: {x: 4, y: 1.8647859}
+  m_Direction: 1

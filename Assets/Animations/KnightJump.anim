@@ -46,9 +46,6 @@ AnimationClip:
     - time: 0.36666667
       value: {fileID: 8278566502845999923, guid: 40e8eb3c1046720428cb250853c007fd,
         type: 3}
-    - time: 0.53333336
-      value: {fileID: -7022734580619261874, guid: 40e8eb3c1046720428cb250853c007fd,
-        type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -77,13 +74,12 @@ AnimationClip:
     - {fileID: 2511048077603649539, guid: 40e8eb3c1046720428cb250853c007fd, type: 3}
     - {fileID: 513507753970481495, guid: 40e8eb3c1046720428cb250853c007fd, type: 3}
     - {fileID: 8278566502845999923, guid: 40e8eb3c1046720428cb250853c007fd, type: 3}
-    - {fileID: -7022734580619261874, guid: 40e8eb3c1046720428cb250853c007fd, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.55
+    m_StopTime: 0.38333336
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -105,6 +101,20 @@ AnimationClip:
   m_Events:
   - time: 0.083333336
     functionName: jumpSquat
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.083333336
+    functionName: setPreJumpSquatFalse
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.36666667
+    functionName: enterFreeFall
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

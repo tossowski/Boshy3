@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,14 +26,22 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        
         if (!anim.GetBool("SHINEI"))
         {
-            move();
-            attack();
+            if (!anim.GetBool("attacking"))
+            {
+                move();
+                attack();
+
+            }        
             jump();
         }
 
+    }
+
+    public void enterFreeFall()
+    {
+        anim.SetBool("freeFall", true);
     }
 
     private void move()
@@ -62,9 +71,19 @@ public class PlayerController : MonoBehaviour
 
     void attack()
     {
-        if (Input.GetKeyDown("x") && !anim.GetBool("airborne"))
+        if (Input.GetKeyDown("x"))
         {
+
             anim.SetBool("attacking", true);
+            if (!anim.GetBool("airborne"))
+            {
+                myRigidBody.velocity = new Vector2(0.0f, 0.0f);
+            } else if (anim.GetBool("preJumpSquat"))
+            {
+                anim.SetBool("airborne", false);
+                anim.SetBool("preJumpSquat", false);
+            }
+
         }
          
             
@@ -89,10 +108,11 @@ public class PlayerController : MonoBehaviour
 
     void jump()
     {
-        if (Input.GetKeyDown("z"))
+        if (Input.GetKeyDown("z") && !anim.GetBool("attacking"))
         {
             if (!anim.GetBool("airborne"))
             {
+                anim.SetBool("preJumpSquat", true);
                 anim.SetBool("airborne", true);
             } else if (secondJumpAvailable)
             {
@@ -103,10 +123,25 @@ public class PlayerController : MonoBehaviour
         }   
     }
 
+    public void setDoubleJumpFalse()
+    {
+        anim.SetBool("doubleJump", false);
+    }
+
+    public void setPreJumpSquatFalse()
+    {
+        anim.SetBool("preJumpSquat", false);
+    }
+
     public void setAirborneFalse()
     {
         anim.SetBool("airborne", false);
         anim.SetBool("doubleJump", false);
+        anim.SetBool("freeFall", false);
+        anim.SetBool("attacking", false);
+        anim.SetBool("running", false);
+        anim.SetBool("preJumpSquat", false);
         secondJumpAvailable = true;
     }
+
 }

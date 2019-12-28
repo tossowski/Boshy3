@@ -17,7 +17,7 @@ public class Hitbox : MonoBehaviour
     }
 
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
 
         if (collision.gameObject.tag == "Enemy")
@@ -36,6 +36,9 @@ public class Hitbox : MonoBehaviour
             Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
             
             rb.AddForce(dirVector * 1000.0f, ForceMode2D.Impulse);
+        } else if (collision.gameObject.tag == "Dummy")
+        {
+            collision.gameObject.GetComponent<Dummy>().damage(5);
         }
     }
 

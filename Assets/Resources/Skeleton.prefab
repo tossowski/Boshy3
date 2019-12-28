@@ -225,8 +225,8 @@ GameObject:
   - component: {fileID: 2607883518614050451}
   - component: {fileID: 2607883518614050444}
   - component: {fileID: 2607883518614050448}
-  - component: {fileID: 2607883518614050449}
   - component: {fileID: 2607883518614050455}
+  - component: {fileID: 1206433165}
   m_Layer: 9
   m_Name: Skeleton
   m_TagString: Enemy
@@ -339,33 +339,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
---- !u!61 &2607883518614050449
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2607883518614050445}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.40408516, y: -0.53895855}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.142857, y: 4.714286}
-    newSize: {x: 6.142857, y: 5.285714}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.4399891, y: 3.4935117}
-  m_EdgeRadius: 0
+  m_Constraints: 4
 --- !u!114 &2607883518614050455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,4 +355,20 @@ MonoBehaviour:
   maxHealth: 10
   currHealth: 10
   attackRange: 4
-  maxSpeed: 10
+  maxSpeed: 5
+--- !u!70 &1206433165
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2607883518614050445}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.421875, y: -0.5675175}
+  m_Size: {x: 1.6590195, y: 3.5792508}
+  m_Direction: 0
