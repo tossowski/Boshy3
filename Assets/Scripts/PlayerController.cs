@@ -31,7 +31,11 @@ public class PlayerController : MonoBehaviour
             if (!anim.GetBool("attacking"))
             {
                 move();
-                attack();
+                if (!anim.GetBool("preJumpSquat"))
+                {
+                    attack();
+                }
+                
 
             }        
             jump();
@@ -78,11 +82,7 @@ public class PlayerController : MonoBehaviour
             if (!anim.GetBool("airborne"))
             {
                 myRigidBody.velocity = new Vector2(0.0f, 0.0f);
-            } else if (anim.GetBool("preJumpSquat"))
-            {
-                anim.SetBool("airborne", false);
-                anim.SetBool("preJumpSquat", false);
-            }
+            } 
 
         }
          
@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour
         {
             myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, jumpForce);
         }
+        anim.SetBool("preJumpSquat", false);
     }
 
 

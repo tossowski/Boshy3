@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public int maxHealth;
     public int currHealth;
     public float attackRange;
+    public GameObject damageLoc;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,8 +46,16 @@ public class Enemy : MonoBehaviour
 
     public virtual void deathrattle()
     {
-        //GetComponent<BoxCollider2D>().enabled = false;
+        myrigidbody.velocity = Vector2.zero;
         anim.SetBool("SHINEI", true);
         Destroy(gameObject, 1.0f);
+    }
+
+    public virtual void hitStun()
+    {
+        anim.SetBool("hitstun", true);
+        string[] tokens = gameObject.name.Split(' ');
+        anim.Play(tokens[0] + "Hit", -1, 0.0f);
+        Debug.Log(tokens[0]);
     }
 }

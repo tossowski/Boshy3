@@ -22,23 +22,28 @@ public class Hitbox : MonoBehaviour
 
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<Enemy>().damage(5);
-            Instantiate(effect, collision.gameObject.transform.position, Quaternion.identity);
-            var clone = Instantiate(damagenumber, collision.gameObject.transform.position, Quaternion.identity) as GameObject;
-            clone.GetComponent<DamageNumber>().displayNumber.text = "-" + damage;
             Animator anim = collision.gameObject.GetComponent<Animator>();
-            anim.SetBool("hitstun", true);
-            Vector3 dirVector = Vector3.Normalize(new Vector3(1.0f, 1.0f, 0.0f));
-            if (collision.gameObject.transform.position.x < player.transform.position.x)
+            if (!anim.GetBool("SHINEI"))
             {
-                dirVector = Vector3.Normalize(new Vector3(-1.0f, 1.0f, 0.0f));
+                Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+                enemy.hitStun();
+                Instantiate(effect, collision.gameObject.transform.position, Quaternion.identity);
+                var clone = Instantiate(damagenumber, enemy.damageLoc.transform.position, Quaternion.identity) as GameObject;
+                clone.GetComponent<DamageNumber>().displayNumber.text = "-" + damage;
+                Vector3 dirVector = Vector3.Normalize(new Vector3(1.0f, 1.0f, 0.0f));
+                if (collision.gameObject.transform.position.x < player.transform.position.x)
+                {
+                    dirVector = Vector3.Normalize(new Vector3(-1.0f, 1.0f, 0.0f));
+                }
+                Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
+
+                rb.AddForce(dirVector * 1000.0f, ForceMode2D.Impulse);
+                enemy.damage(5);
             }
-            Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-            
-            rb.AddForce(dirVector * 1000.0f, ForceMode2D.Impulse);
+
         } else if (collision.gameObject.tag == "Dummy")
         {
-            collision.gameObject.GetComponent<Dummy>().damage(5);
+            collision.gameObject.GetComponent<Dummy>().damage(damage);
         }
     }
 

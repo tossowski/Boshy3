@@ -1,19 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+
 
 public class Skeleton : Enemy
 {
 
     private bool facingLeft;
     private bool attacking;
-    private bool isInHitStun;
     public float maxSpeed;
+    
 
     // Update is called once per frame
     public override void Update()
     {
-        if (!isInHitStun)
+        if (!anim.GetBool("hitstun"))
         {
             attack();
             move();
@@ -52,15 +54,6 @@ public class Skeleton : Enemy
         anim.SetBool("hitstun", false);
     }
 
-    public void onHitStart()
-    {
-        isInHitStun = true;
-    }
-
-    public void setHitStunOff()
-    {
-        isInHitStun = false;
-    }
 
 
     public override void attack()
