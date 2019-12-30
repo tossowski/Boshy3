@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using System;
 
@@ -7,47 +8,38 @@ public class CameraController : MonoBehaviour
 {
     private GameObject player;
     private Camera cam;
-    private Transform walls;
-    private bool locked;
+    private CinemachineVirtualCamera vcam;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
         cam = GetComponent<Camera>();
-        locked = false;
-        walls = transform.Find("Walls");
+        vcam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (!locked)
-        {
-            float height = 2f * cam.orthographicSize;
-            float width = height * cam.aspect;
-            transform.position = new Vector3(Math.Max(player.transform.position.x, width / 2.096259f), player.transform.position.y, transform.position.z);
-        }
-        
+
     }
+
+
 
     public void unlock()
     {
-        foreach (Transform child in walls)
-        {
-            child.gameObject.SetActive(false);
-        }
-        locked = false;
-
+        var orbital = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
+        orbital.m_DeadZoneWidth = 0f;
+        orbital.m_DeadZoneHeight = 0f;
     }
 
     public void startEvent(GameObject e)
     {
-        foreach (Transform child in walls)
-        {
-            child.gameObject.SetActive(true);
-        }
+        var orbital = vcam.GetCinemachineComponent<CinemachineFramingTransposer>();
+        orbital.m_DeadZoneWidth = 1.5f;
+        orbital.m_DeadZoneHeight = 1.5f;
         e.SetActive(true);
-        locked = true;
+        e.GetComponent<FightingEvent>().snapToX(transform.position.x);
     }
 }

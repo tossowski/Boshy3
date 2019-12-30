@@ -2,31 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Sound;
+using GlobalSettings;
 
 public class PlayerController : MonoBehaviour
 {
     
 
     private Animator anim;
+    private GameObject menu;
+    public bool UIOpen;
     private Rigidbody2D myRigidBody;
     public float moveSpeed;
     public float jumpForce;
     public GameObject projectile;
     private bool facingLeft;
-    private bool secondJumpAvailable;
+    public bool secondJumpAvailable;
+
+
+
+    private bool attackIsColliding;
     // Start is called before the first frame update
     void Start()
     {
+        UIOpen = false;
         secondJumpAvailable = true;
+        menu = GameObject.Find("Canvas").transform.Find("Menu").gameObject;
+        menu.SetActive(false);
         anim = GetComponent<Animator>();
         myRigidBody = GetComponent<Rigidbody2D>();
+        attackIsColliding = false;
+        Sound.SoundFX.playSound("Music/WiiSportsLol", true, 0.4f);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (!anim.GetBool("SHINEI"))
+        if (!anim.GetBool("SHINEI") && !UIOpen)
         {
             if (!anim.GetBool("attacking"))
             {
@@ -39,6 +52,13 @@ public class PlayerController : MonoBehaviour
 
             }        
             jump();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 0.0f;
+            UIOpen = true;
+            menu.SetActive(true);
         }
 
     }
@@ -143,6 +163,32 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("running", false);
         anim.SetBool("preJumpSquat", false);
         secondJumpAvailable = true;
+    }
+
+    public void setAirborneTrue()
+    {
+        anim.SetBool("airborne", true);
+    }
+
+    public void setAttackColliding(bool val)
+    {
+        attackIsColliding = val;
+    }
+
+    public void playSound(String sound)
+    {
+        Sound.SoundFX.playSound("SoundFX/" + sound, false, GlobalSettings.Settings.soundfxVolume);
+    }
+
+    public void playAttackSound(String sound)
+    {
+        if (attackIsColliding)
+        {
+            Sound.SoundFX.playSound("SoundFX/Hit", false, GlobalSettings.Settings.soundfxVolume);
+        } else
+        {
+            Sound.SoundFX.playSound("SoundFX/" + sound + "Miss", false, GlobalSettings.Settings.soundfxVolume);
+        }
     }
 
 }

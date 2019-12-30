@@ -56,6 +56,5 @@ public class Enemy : MonoBehaviour
         anim.SetBool("hitstun", true);
         string[] tokens = gameObject.name.Split(' ');
         anim.Play(tokens[0] + "Hit", -1, 0.0f);
-        Debug.Log(tokens[0]);
     }
 }

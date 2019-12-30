@@ -13,6 +13,19 @@ public class JumpResetter : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        player.setAirborneFalse();
+        if (collision.gameObject.tag != "Attack")
+        {
+            player.setAirborneFalse();
+        }
+            
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag != "Attack")
+        {
+            player.setAirborneTrue();
+        }
+        
     }
 }

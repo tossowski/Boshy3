@@ -19,9 +19,10 @@ public class Hitbox : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-
+        
         if (collision.gameObject.tag == "Enemy")
         {
+            player.GetComponent<PlayerController>().setAttackColliding(true);
             Animator anim = collision.gameObject.GetComponent<Animator>();
             if (!anim.GetBool("SHINEI"))
             {
@@ -43,8 +44,14 @@ public class Hitbox : MonoBehaviour
 
         } else if (collision.gameObject.tag == "Dummy")
         {
+            player.GetComponent<PlayerController>().setAttackColliding(true);
             collision.gameObject.GetComponent<Dummy>().damage(damage);
         }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        player.GetComponent<PlayerController>().setAttackColliding(false);
     }
 
 }
