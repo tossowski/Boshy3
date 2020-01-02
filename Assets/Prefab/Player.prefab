@@ -233,10 +233,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04cfb79cc128f0b45a66cc3b78819761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIOpen: 0
   moveSpeed: 20
   jumpForce: 35
   projectile: {fileID: 3158671954212801458, guid: 7206c2d3200a0544fabdc14f2294c94c,
     type: 3}
+  secondJumpAvailable: 0
 --- !u!50 &4884000216066349448
 Rigidbody2D:
   serializedVersion: 4

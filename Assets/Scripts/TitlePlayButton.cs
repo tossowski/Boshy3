@@ -6,8 +6,21 @@ using UnityEngine.SceneManagement;
 public class TitlePlayButton : MonoBehaviour
 {
     // Start is called before the first frame update
-    public void GoToLevel1()
+    public void GoToTutorial()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Tutorial");
+        Time.timeScale = 1.0f;
+    }
+
+    public void GoToCastle()
+    {
+        SceneManager.LoadScene("Castle");
+        Time.timeScale = 1.0f;
+    }
+
+    public void GoToTitleScreen()
+    {
+        SceneManager.LoadScene("TitleScreen");
+        Time.timeScale = 1.0f;
     }
 }

@@ -1,19 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine; 
+using Cinemachine;
 
-public class Killzone : MonoBehaviour
+public class KillZone : MonoBehaviour
 {
+
+    private GameObject player;
+    private CinemachineVirtualCamera vcam;
     public GameObject respawnLoc;
+
+    void Start()
+    {
+        player = GameObject.Find("Player");
+        vcam = GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
+    }
 
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Player")
         {
+            other.gameObject.GetComponent<HealthManager>().takeDamage(2);
+            vcam.PreviousStateIsValid = false;
             other.gameObject.transform.position = respawnLoc.transform.position;
-            Animator anim = other.gameObject.GetComponent<Animator>();
-            GameObject.Find("VirtualCamera").GetComponent<CinemachineVirtualCamera>().PreviousStateIsValid = false;
         }
     }
 }

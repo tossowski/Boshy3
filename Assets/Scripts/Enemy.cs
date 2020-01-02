@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     public float attackRange;
     public GameObject damageLoc;
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         myrigidbody = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player");
@@ -40,14 +40,13 @@ public class Enemy : MonoBehaviour
         currHealth -= n;
         if (currHealth <= 0)
         {
-            deathrattle();
+            myrigidbody.velocity = Vector2.zero;
+            anim.SetBool("SHINEI", true);
         }
     }
 
     public virtual void deathrattle()
     {
-        myrigidbody.velocity = Vector2.zero;
-        anim.SetBool("SHINEI", true);
         Destroy(gameObject, 1.0f);
     }
 

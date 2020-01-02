@@ -467,10 +467,10 @@ TextureImporter:
       name: Keyboard White_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 240
-        width: 16
-        height: 16
+        x: 27
+        y: 239
+        width: 21
+        height: 17
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -488,10 +488,10 @@ TextureImporter:
       name: Keyboard White_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 27
         y: 240
-        width: 16
-        height: 16
+        width: 21
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1706,10 +1706,10 @@ TextureImporter:
       name: Keyboard White_59
       rect:
         serializedVersion: 2
-        x: 32
+        x: 27
         y: 144
-        width: 16
-        height: 16
+        width: 21
+        height: 13
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

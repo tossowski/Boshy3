@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 620269288}
   m_Layer: 0
   m_Name: AttackBox
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 842290278}
   m_Layer: 0
   m_Name: AttackBox3
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 1155782745}
   m_Layer: 0
   m_Name: AttackBox2
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currHealth: 100
+  currHealth: 1
   attackRange: 4
   damageLoc: {fileID: 1875241635}
   maxSpeed: 5

@@ -16,6 +16,7 @@ public class JumpResetter : MonoBehaviour
         if (collision.gameObject.tag != "Attack")
         {
             player.setAirborneFalse();
+            player.GetComponent<Rigidbody2D>().gravityScale = 40f;
         }
             
     }
@@ -25,6 +26,7 @@ public class JumpResetter : MonoBehaviour
         if (collision.gameObject.tag != "Attack")
         {
             player.setAirborneTrue();
+            player.GetComponent<Rigidbody2D>().gravityScale = 7f; ;
         }
         
     }

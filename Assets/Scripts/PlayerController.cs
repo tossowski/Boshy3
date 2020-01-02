@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public GameObject projectile;
     private bool facingLeft;
     public bool secondJumpAvailable;
-
+    private bool yeetEverything;
 
 
     private bool attackIsColliding;
@@ -32,12 +32,17 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         myRigidBody = GetComponent<Rigidbody2D>();
         attackIsColliding = false;
-        Sound.SoundFX.playSound("Music/WiiSportsLol", true, 0.4f);
+        GlobalSettings.Settings.soundfxVolume = 0.4f;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (yeetEverything)
+        {
+            return;
+        }
 
         if (!anim.GetBool("SHINEI") && !UIOpen)
         {
@@ -131,6 +136,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown("z") && !anim.GetBool("attacking"))
         {
+            myRigidBody.gravityScale = 7f;
             if (!anim.GetBool("airborne"))
             {
                 anim.SetBool("preJumpSquat", true);
@@ -189,6 +195,18 @@ public class PlayerController : MonoBehaviour
         {
             Sound.SoundFX.playSound("SoundFX/" + sound + "Miss", false, GlobalSettings.Settings.soundfxVolume);
         }
+    }
+
+    public void yeetPlayerMovement()
+    {
+        yeetEverything = true;
+        myRigidBody.velocity = Vector2.zero;
+        anim.SetBool("running", false);
+    }
+
+    public void resumePlayerMovement()
+    {
+        yeetEverything = false;
     }
 
 }

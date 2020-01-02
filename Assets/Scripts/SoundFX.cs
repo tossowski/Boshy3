@@ -8,6 +8,43 @@ namespace Sound
 
     public class SoundFX : MonoBehaviour
     {
+        private static AudioSource music;
+        private static bool fadeOutMusic;
+        private static bool fadeInMusic;
+        private static float targetVolume;
+        private static float dv;
+
+        void Update()
+        {
+            if (fadeOutMusic)
+            {
+                if (music.volume > 0)
+                {
+                    music.volume -= dv;
+                } else
+                {
+                    fadeOutMusic = false;
+                    Destroy(music.gameObject);
+                }
+                
+            }
+
+            if (fadeInMusic)
+            {
+                if (music.volume < targetVolume)
+                {
+                    music.volume += dv;
+                }
+                else
+                {
+                    fadeInMusic = false;
+
+                }
+
+            }
+        }
+
+
         public static void playSound(string name, bool repeat = true, float v = 1f)
         {
             GameObject sound = Resources.Load("AudioClip") as GameObject;
@@ -31,6 +68,32 @@ namespace Sound
                     Destroy(g);
                 }
             }
+        }
+
+        public static void fadeMusicOut(float duration = 1.0f)
+        {
+            foreach (GameObject g in GameObject.FindGameObjectsWithTag("AudioClip"))
+            {
+                if (g.GetComponent<AudioSource>().loop == true)
+                {
+                    music = g.GetComponent<AudioSource>();
+                    dv = music.volume / duration * Time.deltaTime;
+                    fadeOutMusic = true;
+                }
+            }
+        }
+
+        public static void fadeMusicIn(string name,  float v = 1f, float duration = 2.0f)
+        {
+            GameObject sound = Resources.Load("AudioClip") as GameObject;
+            sound.GetComponent<AudioSource>().clip = Resources.Load(name) as AudioClip;
+            sound.GetComponent<AudioSource>().volume = 0.0f;
+            targetVolume = v;
+            dv = targetVolume / duration * Time.deltaTime;
+            GameObject clone = Instantiate(sound, Vector3.zero, Quaternion.identity) as GameObject;
+            music = clone.GetComponent<AudioSource>();
+            fadeInMusic = true;
+
         }
 
         public static void adjustMusicVolume(float target)

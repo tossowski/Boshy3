@@ -7,10 +7,10 @@ using UnityEditor;
 public class Skeleton : Enemy
 {
 
-    private bool facingLeft;
-    private bool attacking;
+    protected bool facingLeft;
+    protected bool attacking;
     public float maxSpeed;
-    
+
 
     // Update is called once per frame
     public override void Update()
@@ -70,4 +70,21 @@ public class Skeleton : Enemy
         attacking = false;
         anim.SetBool("attacking", false);
     }
+
+    public override void deathrattle()
+    {
+        
+
+        if (!player.GetComponent<HealthManager>().isFullHP())
+        {
+            GameObject heart = Resources.Load("Heart") as GameObject;
+            Instantiate(heart, transform.position, Quaternion.identity);
+        }
+        
+        base.deathrattle();
+        
+    }
+
+   
+
 }
