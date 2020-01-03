@@ -3,25 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;  
 
-public class Door : MonoBehaviour
+public class Door : Interactable
 {
 
     public GameObject dDoor;
     private Animator anim;
     private Animator destanim;
-    private GameObject player;
     private SpriteRenderer sp;
-    private GameObject Ekey;
-    private bool triggerStay;
     private bool fadeOutPlayer;
     private bool fadeInPlayer;
     private bool doneTransitioning;
 
     void Start()
     {
-        Ekey = transform.Find("EKey").gameObject;
-        Ekey.SetActive(false);
-        player = GameObject.Find("Player");
+        base.Start();
         sp = player.GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         destanim = dDoor.GetComponent<Animator>();
@@ -31,17 +26,10 @@ public class Door : MonoBehaviour
         doneTransitioning = true;
     }
 
-    void Update()
+    public override void Update()
     {
 
-        if (Input.GetKeyDown("e") && triggerStay && doneTransitioning)
-        {
-            doneTransitioning = false;
-            fadeOutPlayer = true;
-            player.GetComponent<PlayerController>().yeetPlayerMovement();
-            Ekey.SetActive(false);
-            anim.Play("DoorOpen", -1, 0.0f);
-        }
+        base.Update();
 
         if (fadeOutPlayer)
         {
@@ -72,30 +60,26 @@ public class Door : MonoBehaviour
 
     }
 
-
-    void OnTriggerEnter2D(Collider2D other)
+    public override void Interact()
     {
-        if (other.gameObject.tag == "Player")
+        if (doneTransitioning)
         {
-            triggerStay = true;
+            doneTransitioning = false;
+            fadeOutPlayer = true;
+            player.GetComponent<PlayerController>().yeetPlayerMovement();
+            anim.Play("DoorOpen", -1, 0.0f);
         }
+    }
 
+    public override void OnTriggerEnter2D(Collider2D other)
+    {
+        base.OnTriggerEnter2D(other);
         if (sp.color.a <= 0)
         {
             fadeInPlayer = true;
         }
-        Ekey.SetActive(true);
     }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            triggerStay = false;
-            Ekey.SetActive(false);
-        }
-
-    }
+    
 
     public void setDoorOpen()
     {
