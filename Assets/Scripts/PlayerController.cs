@@ -68,6 +68,16 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public Rigidbody2D getRigidBody()
+    {
+        return myRigidBody;
+    }
+
+    public Animator getAnimator()
+    {
+        return anim;
+    }
+
     public void enterFreeFall()
     {
         anim.SetBool("freeFall", true);

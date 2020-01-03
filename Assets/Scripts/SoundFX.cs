@@ -61,6 +61,8 @@ namespace Sound
 
         public static void stopAllMusic()
         {
+            fadeOutMusic = false;
+            fadeInMusic = false;
             foreach (GameObject g in GameObject.FindGameObjectsWithTag("AudioClip"))
             {
                 if (g.GetComponent<AudioSource>().loop == true)
