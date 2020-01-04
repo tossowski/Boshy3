@@ -59,7 +59,7 @@ public class DialogueManager : MonoBehaviour
         {
             if (drawingWords)
             {
-                Sound.SoundFX.playSound("SoundFX/DialogueAmbient", false, 4 * GlobalSettings.Settings.soundfxVolume);
+                Sound.SoundFX.playSound("SoundFX/DialogueAmbient", false, GlobalSettings.Settings.soundfxVolume);
                 yield return new WaitForSeconds(.05f);
             } else
             {

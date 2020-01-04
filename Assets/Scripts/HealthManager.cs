@@ -15,11 +15,13 @@ public class HealthManager : MonoBehaviour
     private Sprite wholeHeart;
     private Sprite halfHeart;
     private Sprite emptyHeart;
+    private bool dead;
     
 
     // Start is called before the first frame update
     void Start()
     {
+        dead = false;
         fullHeart = Resources.Load("GUI/FullHeart") as GameObject;
         wholeHeart = Resources.Load<Sprite>("GUI/WholeHeart");
         halfHeart = Resources.Load<Sprite>("GUI/HalfHeart");
@@ -39,10 +41,13 @@ public class HealthManager : MonoBehaviour
         int prevHealth = currHealth;
         currHealth = Math.Max(currHealth - n, 0);
         redrawHearts();
-        if (currHealth <= 0)
+        if (currHealth <= 0 && !dead) 
         {
+            GetComponent<PlayerController>().UIOpen = true;
+            dead = true;
             Animator anim = GetComponent<Animator>();
             anim.SetBool("SHINEI", true);
+            die();
         }
     }
 
@@ -76,5 +81,20 @@ public class HealthManager : MonoBehaviour
     public bool isFullHP()
     {
         return currHealth == maxHearts;
+    }
+
+    public void die()
+    {
+        Sound.SoundFX.stopAllMusic();
+        Sound.SoundFX.playSound("SoundFX/TBC", false, 1.0f);
+        StartCoroutine(shinei());
+    }
+
+    IEnumerator shinei()
+    {
+        
+        GameObject shineiPanel = GameObject.Find("Canvas").transform.Find("ShineiPanel").gameObject;
+        yield return new WaitForSeconds(3.4f);
+        shineiPanel.SetActive(true);
     }
 }

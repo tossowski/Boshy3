@@ -157,6 +157,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("doubleJump", true);
                 secondJumpAvailable = false;
             }
+            
         }   
     }
 

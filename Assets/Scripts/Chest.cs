@@ -35,6 +35,10 @@ public class Chest : Interactable
         looted = true;
         Ekey.SetActive(false);
         GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    void startDialogue()
+    {
         dm.refreshText(text);
     }
 }

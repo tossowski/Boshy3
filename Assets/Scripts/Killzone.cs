@@ -20,9 +20,9 @@ public class KillZone : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<HealthManager>().takeDamage(2);
             vcam.PreviousStateIsValid = false;
             other.gameObject.transform.position = respawnLoc.transform.position;
+            other.gameObject.GetComponent<HealthManager>().takeDamage(2);
         }
     }
 }

@@ -1631,11 +1631,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8640940510812834570, guid: 631213ae3483caa42a707f655b51e4cb,
-        type: 3}
-      propertyPath: m_Name
-      value: Canvas
-      objectReference: {fileID: 0}
     - target: {fileID: 8640940510812834574, guid: 631213ae3483caa42a707f655b51e4cb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1740,6 +1735,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640940510812834570, guid: 631213ae3483caa42a707f655b51e4cb,
+        type: 3}
+      propertyPath: m_Name
+      value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 344280797, guid: 631213ae3483caa42a707f655b51e4cb, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2084,7 +2084,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 843710041}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 579d54bea5531e244833e29ecd460de6, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d2af69abf256104c89d5b58cda09a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   respawnLoc: {fileID: 1290645960}
@@ -4623,6 +4623,25 @@ RectTransform:
   m_AnchoredPosition: {x: 17.01, y: 11}
   m_SizeDelta: {x: 20, y: 8.38}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2052822373 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9082238238556076471, guid: 5f25c4196adda2b48b1854a9fe5a8e15,
+    type: 3}
+  m_PrefabInstance: {fileID: 9082238238392049708}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2052822374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052822373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d2af69abf256104c89d5b58cda09a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnLoc: {fileID: 1728343751}
 --- !u!1001 &556604685555731420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5114,5 +5133,6 @@ PrefabInstance:
       propertyPath: respawnLoc
       value: 
       objectReference: {fileID: 1728343751}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9082238238556076464, guid: 5f25c4196adda2b48b1854a9fe5a8e15, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5f25c4196adda2b48b1854a9fe5a8e15, type: 3}

@@ -15,9 +15,9 @@ public class EnemyAttackBox : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.gameObject.tag == "Player")
         {
+            
             collision.gameObject.GetComponent<HealthManager>().takeDamage(damage);
            // Vector3 dirVector = Vector3.Normalize(new Vector3(1.0f, 1.0f, 0.0f));
            // if (collision.gameObject.transform.position.x > player.transform.position.x)
