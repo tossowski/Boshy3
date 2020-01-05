@@ -10,10 +10,14 @@ public class Chest : Interactable
     private bool looted;
     private DialogueManager dm;
     public List<string> text;
+    private GameObject item;
+    private bool movingItem;
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
+        item = transform.Find("Item").gameObject;
+        movingItem = false;
         anim = GetComponent<Animator>();
         looted = false;
         dm = GameObject.Find("Canvas").transform.Find("DialoguePanel").gameObject.GetComponent<DialogueManager>();
@@ -25,6 +29,11 @@ public class Chest : Interactable
         {
             base.Update();
         }
+
+        if (movingItem)
+        {
+            item.transform.Translate(8 * new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime);
+        }
     }
 
     public override void Interact()
@@ -35,10 +44,13 @@ public class Chest : Interactable
         looted = true;
         Ekey.SetActive(false);
         GetComponent<BoxCollider2D>().enabled = false;
+        item.SetActive(true);
+        movingItem = true;
     }
 
     void startDialogue()
     {
-        dm.refreshText(text);
+        dm.refreshText(text, item.GetComponent<Item>());
+        movingItem = false;
     }
 }

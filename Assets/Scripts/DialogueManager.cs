@@ -46,10 +46,10 @@ public class DialogueManager : MonoBehaviour
     }
 
 
-    public void refreshText(List<string> newText)
+    public void refreshText(List<string> newText, Item item = null)
     {
         gameObject.SetActive(true);
-        StartCoroutine(drawText(newText));
+        StartCoroutine(drawText(newText, item));
         StartCoroutine(playDialogueSound());
     }
 
@@ -69,7 +69,7 @@ public class DialogueManager : MonoBehaviour
         
     }
 
-    IEnumerator drawText(List<string> newText)
+    IEnumerator drawText(List<string> newText, Item item)
     {
         finished = false;
         for (int i = 0; i < newText.Count; i++)
@@ -111,6 +111,10 @@ public class DialogueManager : MonoBehaviour
         finished = true;
         Sound.SoundFX.playSound("SoundFX/DialogueClose", false, 4 * GlobalSettings.Settings.soundfxVolume);
         GameObject.Find("Player").GetComponent<PlayerController>().resumePlayerMovement();
+        if (item != null)
+        {
+            item.OnCollect();
+        }
         gameObject.SetActive(false);
     }
     
