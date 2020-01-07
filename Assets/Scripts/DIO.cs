@@ -46,7 +46,7 @@ public class DIO : Enemy
     public override void move()
     {
 
-        transform.position = new Vector2(player.transform.position.x, player.transform.position.y) + Random.insideUnitCircle * 5;
+        transform.position = new Vector2(player.transform.position.x, player.transform.position.y) + Random.insideUnitCircle * 20;
         return;
 
         float distance = Vector3.Distance(player.transform.position, transform.position);

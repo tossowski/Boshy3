@@ -12,7 +12,8 @@ public class Chest : Interactable
     public List<string> text;
     private GameObject item;
     private bool movingItem;
-    // Start is called before the first frame update
+
+
     void Start()
     {
         base.Start();
@@ -51,6 +52,7 @@ public class Chest : Interactable
     void startDialogue()
     {
         dm.refreshText(text, item.GetComponent<Item>());
+        GameObject.Find("Player").GetComponent<PlayerController>().resumePlayerMovement();
         movingItem = false;
     }
 }

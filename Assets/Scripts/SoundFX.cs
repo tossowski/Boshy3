@@ -45,7 +45,7 @@ namespace Sound
         }
 
 
-        public static void playSound(string name, bool repeat = true, float v = 1f)
+        public static float playSound(string name, bool repeat = true, float v = 1f)
         {
             GameObject sound = Resources.Load("AudioClip") as GameObject;
             sound.GetComponent<AudioSource>().clip = Resources.Load(name) as AudioClip;
@@ -55,8 +55,8 @@ namespace Sound
             {
                 clone.GetComponent<AudioSource>().loop = false;
                 Destroy(clone, (int)(sound.GetComponent<AudioSource>().clip.length + 1));
-
             }
+            return sound.GetComponent<AudioSource>().clip.length;
         }
 
         public static void stopAllMusic()

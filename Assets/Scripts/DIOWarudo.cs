@@ -38,7 +38,7 @@ public class DIOWarudo : MonoBehaviour
             Sound.SoundFX.stopAllMusic();
             Sound.SoundFX.playSound("SoundFX/ZAWARUDO", false, 2 * GlobalSettings.Settings.soundfxVolume);
             slowingTime = true;
-            
+            GetComponent<BoxCollider2D>().enabled = false;
         }
 
     }
@@ -46,5 +46,6 @@ public class DIOWarudo : MonoBehaviour
     public void resumeTime()
     {
         Time.timeScale = 1f;
+        GetComponent<BoxCollider2D>().enabled = true;
     }
 }

@@ -41,6 +41,7 @@ public class GreenSkeleton : Skeleton
 
     IEnumerator deathSequence()
     {
+        player.GetComponent<PlayerController>().UIOpen = true;
         pos = transform.position;
         anim.enabled = false;
         Sound.SoundFX.stopAllMusic();
@@ -54,9 +55,9 @@ public class GreenSkeleton : Skeleton
         Time.timeScale = 1.0f;
         jittering = true;
         
-        Sound.SoundFX.playSound("SoundFX/ORAORAORA", false, 1.0f);
+        float length = Sound.SoundFX.playSound("SoundFX/ORAORAORA", false, 1.0f);
         player.GetComponent<PlayerController>().getAnimator().Play("ORAORAORA", -1, 0.0f);
-        timer = 2.0f;
+        timer = length / 3;
         while (timer > 0)
         {
             yield return null;
@@ -65,5 +66,6 @@ public class GreenSkeleton : Skeleton
         jittering = false;
         player.GetComponent<PlayerController>().resumePlayerMovement();
         player.GetComponent<PlayerController>().getAnimator().Play("KnightIdle", -1, 0.0f);
+        player.GetComponent<PlayerController>().UIOpen = false;
     }
 }

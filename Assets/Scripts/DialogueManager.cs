@@ -53,6 +53,11 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(playDialogueSound());
     }
 
+    public bool isActive()
+    {
+        return gameObject.active;
+    }
+
     IEnumerator playDialogueSound()
     {
         while (!finished)
@@ -82,6 +87,7 @@ public class DialogueManager : MonoBehaviour
                 
                 if (accelerate)
                 {
+
                     yield return new WaitForSeconds(.005f);
                 }
                 else
@@ -110,7 +116,7 @@ public class DialogueManager : MonoBehaviour
 
         finished = true;
         Sound.SoundFX.playSound("SoundFX/DialogueClose", false, 4 * GlobalSettings.Settings.soundfxVolume);
-        GameObject.Find("Player").GetComponent<PlayerController>().resumePlayerMovement();
+        
         if (item != null)
         {
             item.OnCollect();

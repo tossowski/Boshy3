@@ -29,13 +29,13 @@ public class Skeleton : Enemy
         
         if (x != 0)
         {
-            if (x > 0)
+            if (x > 0.0f)
             {
                 facingLeft = false;
                 myrigidbody.velocity = new Vector2(maxSpeed, myrigidbody.velocity.y);
                 transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
             }
-            else if (x < 0)
+            else if (x < 0.0f)
             {
                 facingLeft = true;
                 myrigidbody.velocity = new Vector2(-maxSpeed, myrigidbody.velocity.y);

@@ -38,6 +38,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (anim.GetBool("SHINEI"))
+        {
+            myRigidBody.velocity = Vector2.zero;
+        }
 
         if (yeetEverything)
         {
