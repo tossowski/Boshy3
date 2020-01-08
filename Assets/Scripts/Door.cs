@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Cinemachine;  
 
 public class Door : Interactable
@@ -8,8 +9,11 @@ public class Door : Interactable
 
     public GameObject dDoor;
     private Animator anim;
+    private Image bossKeyImage;
+    private DialogueManager dm;
     private Animator destanim;
     private SpriteRenderer sp;
+    public bool unlocked;
     private bool fadeOutPlayer;
     private bool fadeInPlayer;
     private bool doneTransitioning;
@@ -23,7 +27,10 @@ public class Door : Interactable
         fadeOutPlayer = false;
         fadeInPlayer = false;
         triggerStay = false;
+        unlocked = false;
         doneTransitioning = true;
+        bossKeyImage = GameObject.Find("Canvas").transform.Find("BossKeyIcon").gameObject.GetComponent<Image>();
+        dm = GameObject.Find("Canvas").transform.Find("DialoguePanel").gameObject.GetComponent<DialogueManager>();
     }
 
     public override void Update()
@@ -64,10 +71,30 @@ public class Door : Interactable
     {
         if (doneTransitioning)
         {
-            doneTransitioning = false;
-            fadeOutPlayer = true;
-            player.GetComponent<PlayerController>().yeetPlayerMovement();
-            anim.Play("DoorOpen", -1, 0.0f);
+
+            if (unlocked)
+            {
+                doneTransitioning = false;
+                fadeOutPlayer = true;
+                player.GetComponent<PlayerController>().yeetPlayerMovement();
+                anim.Play("DoorOpen", -1, 0.0f);
+                return;
+            }
+
+            if (!dm.isActive() && bossKeyImage.color.a == 1.0f)
+            {
+                unlocked = true;
+                dDoor.GetComponent<Door>().unlocked = true;
+                List<string> text = new List<string>();
+                text.Add("The key fits smoothly into the lock");
+                dm.refreshText(text);
+            } else if (!dm.isActive())
+            {
+                List<string> text = new List<string>();
+                text.Add("Looks like you need a key");
+                dm.refreshText(text);
+            }
+            
         }
     }
 

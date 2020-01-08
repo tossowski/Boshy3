@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Sound;
 
 public class Chest : Interactable
@@ -39,6 +40,7 @@ public class Chest : Interactable
 
     public override void Interact()
     {
+
         GameObject.Find("Player").GetComponent<PlayerController>().yeetPlayerMovement();
         anim.Play("ChestOpen", -1, 0.0f);
         Sound.SoundFX.playSound("SoundFX/ChestOpen", false, GlobalSettings.Settings.soundfxVolume);
@@ -51,8 +53,13 @@ public class Chest : Interactable
 
     void startDialogue()
     {
+        Image image = GameObject.Find("Canvas").transform.Find("BossKeyIcon").gameObject.GetComponent<Image>();
+        Color prev = image.color;
+        prev.a = 1.0f;
+        image.color = prev;
+
         dm.refreshText(text, item.GetComponent<Item>());
-        GameObject.Find("Player").GetComponent<PlayerController>().resumePlayerMovement();
+        
         movingItem = false;
     }
 }

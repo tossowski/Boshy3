@@ -76,6 +76,7 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator drawText(List<string> newText, Item item)
     {
+        GameObject.Find("Player").GetComponent<PlayerController>().yeetPlayerMovement();
         finished = false;
         for (int i = 0; i < newText.Count; i++)
         {
@@ -121,6 +122,7 @@ public class DialogueManager : MonoBehaviour
         {
             item.OnCollect();
         }
+        GameObject.Find("Player").GetComponent<PlayerController>().resumePlayerMovement();
         gameObject.SetActive(false);
     }
     
