@@ -69,7 +69,7 @@ public class Door : Interactable
 
     public override void Interact()
     {
-        if (doneTransitioning)
+        if (doneTransitioning && !dm.isActive())
         {
 
             if (unlocked)
@@ -81,14 +81,16 @@ public class Door : Interactable
                 return;
             }
 
-            if (!dm.isActive() && bossKeyImage.color.a == 1.0f)
+            if (bossKeyImage.color.a == 1.0f)
             {
+                transform.Find("Lock").gameObject.GetComponent<Animator>().Play("Unlock", -1, 0.0f);
+                Sound.SoundFX.playSound("SoundFX/LockOpen", false, GlobalSettings.Settings.soundfxVolume);
                 unlocked = true;
                 dDoor.GetComponent<Door>().unlocked = true;
                 List<string> text = new List<string>();
                 text.Add("The key fits smoothly into the lock");
                 dm.refreshText(text);
-            } else if (!dm.isActive())
+            } else
             {
                 List<string> text = new List<string>();
                 text.Add("Looks like you need a key");

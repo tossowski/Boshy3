@@ -54,7 +54,8 @@ public class GreenSkeleton : Skeleton
         }
         Time.timeScale = 1.0f;
         jittering = true;
-        
+
+        player.GetComponent<PlayerController>().getRigidBody().velocity = Vector2.zero;
         float length = Sound.SoundFX.playSound("SoundFX/ORAORAORA", false, 1.0f);
         player.GetComponent<PlayerController>().getAnimator().Play("ORAORAORA", -1, 0.0f);
         timer = length / 3;
