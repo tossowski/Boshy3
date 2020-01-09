@@ -50,17 +50,20 @@ public class CameraPanTrigger : MonoBehaviour
             Sound.SoundFX.stopAllMusic();
             targetCam.m_Priority = 15;
             duration = Sound.SoundFX.playSound("SoundFX/AYEAYYEYEYEYYAAYYAYAYAY", false, 0.4f);
-            Invoke("playJojoMusic", duration);
+            StartCoroutine(playJojoMusic(duration));
             ayeayea = true;
         }
     }
 
-    public void playJojoMusic()
+
+    IEnumerator playJojoMusic(float duration)
     {
-        GameObject.Find("Player").GetComponent<PlayerController>().resumePlayerMovement();
+        yield return new WaitForSeconds(duration);
         Sound.SoundFX.playSound("Music/JojoLoop", true, 0.6f);
+        GameObject.Find("Player").GetComponent<PlayerController>().resumePlayerMovement();
         targetCam.m_Priority = 5;
         GameObject.Find("GreenSkeleton").GetComponent<Animator>().SetBool("fightStarted", true);
+        
         Destroy(gameObject);
     }
 }
