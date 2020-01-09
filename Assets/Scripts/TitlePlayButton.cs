@@ -12,6 +12,12 @@ public class TitlePlayButton : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
+    public void GoToCredits()
+    {
+        SceneManager.LoadScene("Credits");
+        Time.timeScale = 1.0f;
+    }
+
     public void GoToCastle()
     {
         SceneManager.LoadScene("Castle");

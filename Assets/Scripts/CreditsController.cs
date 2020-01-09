@@ -7,10 +7,23 @@ public class CreditsController : MonoBehaviour
 {
 
     Image trio;
+    Animator anim;
 
     void Start()
     {
         trio = GameObject.Find("Canvas").transform.Find("Panel").transform.Find("Credits").transform.Find("Spoiler").gameObject.GetComponent<Image>();
+        anim = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        if (Input.GetKey("e"))
+        {
+            anim.SetFloat("speed", 5.0f);
+        } else
+        {
+            anim.SetFloat("speed", 1.0f);
+        }
     }
 
     void revealSprite()
